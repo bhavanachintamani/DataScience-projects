@@ -1,113 +1,67 @@
-**Netflix Data Analysis Project
-📌 Project Overview**
+# Netflix Data Analysis Project
 
-This project performs Exploratory Data Analysis (EDA) on the Netflix movies and TV shows dataset to identify content trends, popular genres, and distribution of titles across different countries and years. The analysis helps understand Netflix’s content strategy and growth over time.
+# Import required libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-🎯** Project Objectives**
+# Load dataset
+df = pd.read_csv("/content/netflix_titles.csv")
 
-Analyse the distribution of movies vs. TV Shows on Netflix
+# Display first 5 rows
+print("First 5 rows of dataset:")
+print(df.head())
 
-Identify the top countries producing Netflix content
+# Dataset information
+print("\nDataset Information:")
+print(df.info())
 
-Explore content growth over the years
+# Check missing values
+print("\nMissing Values:")
+print(df.isnull().sum())
 
-Discover popular genres and ratings
+# Movies vs TV Shows count
+plt.figure(figsize=(6,4))
+sns.countplot(x='type', data=df)
+plt.title("Movies vs TV Shows on Netflix")
+plt.xlabel("Type")
+plt.ylabel("Count")
+plt.show()
 
-Visualise insights using data visualisation techniques
+# Top 10 countries producing Netflix content
+plt.figure(figsize=(8,5))
+top_countries = df['country'].value_counts().head(10)
+top_countries.plot(kind='bar')
+plt.title("Top 10 Countries Producing Netflix Content")
+plt.xlabel("Country")
+plt.ylabel("Number of Titles")
+plt.show()
 
-🗂 **Dataset Information**
+# Content released per year
+plt.figure(figsize=(8,5))
+df['release_year'].value_counts().sort_index().plot()
+plt.title("Netflix Content Released Per Year")
+plt.xlabel("Year")
+plt.ylabel("Number of Titles")
+plt.show()
 
-The dataset contains information about Netflix titles, including:
+# Most popular genres
+genres = df['listed_in'].str.split(',', expand=True).stack()
+top_genres = genres.value_counts().head(10)
 
-**Show ID**
+plt.figure(figsize=(8,5))
+top_genres.plot(kind='bar')
+plt.title("Top 10 Netflix Genres")
+plt.xlabel("Genre")
+plt.ylabel("Count")
+plt.show()
 
-Title
+# Ratings distribution
+plt.figure(figsize=(8,6))
+sns.countplot(y='rating', data=df, order=df['rating'].value_counts().index)
+plt.title("Distribution of Ratings on Netflix")
+plt.xlabel("Count")
+plt.ylabel("Rating")
+plt.show()
 
-Type (Movie / TV Show)
-
-Director
-
-Cast
-
-Country
-
-Date Added
-
-Release Year
-
-Rating
-
-Duration
-
-Genre
-
-**Dataset format: CSV**
-
-🛠 Tools & Technologies Used
-Tool	Purpose
-Python	Data Analysis
-Pandas	Data cleaning and manipulation
-Matplotlib	Data Visualisation
-Seaborn	Statistical visualization
-Google Collab	Project development
-
-**🔎 Data Analysis Steps**
-
-Importing required Python libraries
-
-Loading the dataset
-
-Data cleaning and handling missing values
-
-Performing Exploratory Data Analysis (EDA)
-
-Creating visualisations to identify patterns
-
-Extracting business insights
-
-📈** Key Insights**
-
-Netflix contains more Movies than TV Shows.
-
-The United States produces the highest amount of Netflix content.
-
-Netflix content production increased significantly after 2015.
-
-The most common genres include Drama, Comedy, and International Movies.
-
-📊 **Sample Visualisations**
-
-The project includes visualisations such as:
-
-Movies vs TV Shows distribution
-
-Content release trend by year
-
-Top countries producing Netflix titles
-
-Most popular genres
-
-Ratings distribution
-
-📁** Project Structure
-Netflix-Data-Analysis**
-│
-├── dataset
-│   └── netflix_titles.csv
-│
-├── notebook
-│   └── netflix_data_analysis.ipynb
-│
-└── README.md
-🚀 **Future Improvements**
-
-Build an interactive dashboard using Power BI
-
-Implement a recommendation system using machine learning
-
-Perform deeper genre-based analysis
-
-📌 **Conclusion**
-
-This project demonstrates practical skills in data cleaning, exploratory data analysis, and data visualisation using Python. It provides insights into Netflix content trends and helps understand patterns in the entertainment industry.
-
+print("\nAnalysis Completed Successfully!")
