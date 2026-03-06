@@ -1,67 +1,100 @@
-# Netflix Data Analysis Project
+# Netflix Data Analysis 📊
 
-# Import required libraries
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+## Project Overview
 
-# Load dataset
-df = pd.read_csv("/content/netflix_titles.csv")
+This project analyses the Netflix movies and TV shows dataset to identify content trends, popular genres, and production patterns. The analysis helps understand how Netflix content has grown over the years and which types of content are most popular.
 
-# Display first 5 rows
-print("First 5 rows of dataset:")
-print(df.head())
+---
 
-# Dataset information
-print("\nDataset Information:")
-print(df.info())
+## Objective
 
-# Check missing values
-print("\nMissing Values:")
-print(df.isnull().sum())
+The main objective of this project is to perform **Exploratory Data Analysis (EDA)** on Netflix data and extract meaningful insights using Python.
 
-# Movies vs TV Shows count
-plt.figure(figsize=(6,4))
-sns.countplot(x='type', data=df)
-plt.title("Movies vs TV Shows on Netflix")
-plt.xlabel("Type")
-plt.ylabel("Count")
-plt.show()
+---
 
-# Top 10 countries producing Netflix content
-plt.figure(figsize=(8,5))
-top_countries = df['country'].value_counts().head(10)
-top_countries.plot(kind='bar')
-plt.title("Top 10 Countries Producing Netflix Content")
-plt.xlabel("Country")
-plt.ylabel("Number of Titles")
-plt.show()
+## Dataset
 
-# Content released per year
-plt.figure(figsize=(8,5))
-df['release_year'].value_counts().sort_index().plot()
-plt.title("Netflix Content Released Per Year")
-plt.xlabel("Year")
-plt.ylabel("Number of Titles")
-plt.show()
+The dataset contains information about Netflix titles, such as:
 
-# Most popular genres
-genres = df['listed_in'].str.split(',', expand=True).stack()
-top_genres = genres.value_counts().head(10)
+* Show ID
+* Title
+* Type (Movie / TV Show)
+* Director
+* Cast
+* Country
+* Release Year
+* Rating
+* Duration
+* Genre
 
-plt.figure(figsize=(8,5))
-top_genres.plot(kind='bar')
-plt.title("Top 10 Netflix Genres")
-plt.xlabel("Genre")
-plt.ylabel("Count")
-plt.show()
+Dataset Source: Netflix Titles Dataset (CSV)
 
-# Ratings distribution
-plt.figure(figsize=(8,6))
-sns.countplot(y='rating', data=df, order=df['rating'].value_counts().index)
-plt.title("Distribution of Ratings on Netflix")
-plt.xlabel("Count")
-plt.ylabel("Rating")
-plt.show()
+---
 
-print("\nAnalysis Completed Successfully!")
+## Tools and Technologies
+
+The following tools were used in this project:
+
+* Python
+* Pandas
+* Matplotlib
+* Seaborn
+* Google Collab
+
+---
+
+## Project Steps
+
+1. Data Loading
+2. Data Cleaning and Handling Missing Values
+3. Exploratory Data Analysis (EDA)
+4. Data Visualisation
+5. Extracting Insights
+
+---
+
+## Key Analysis Performed
+
+* Movies vs TV Shows distribution
+* Top countries producing Netflix content
+* Content growth over the years
+* Most popular genres on Netflix
+* Distribution of ratings
+
+---
+
+## Key Insights
+
+* Netflix has more **Movies than TV Shows**.
+* The **United States produces the highest number of titles**.
+* Content production increased significantly after **2015**.
+* Popular genres include **Drama, Comedy, and Documentaries**.
+
+---
+
+## Project Structure
+
+```
+Netflix-Data-Analysis
+│
+├── netflix_titles.csv
+├── netflix_analysis.ipynb
+└── README.md
+```
+
+---
+
+## Conclusion
+
+This project demonstrates basic data analysis and visualisation skills in Python. It helps understand Netflix content trends and provides insights into the entertainment industry.
+
+---
+
+## Future Improvements
+
+* Build an interactive dashboard using Power BI
+* Apply machine learning models for recommendation systems
+* Perform deeper genre and audience analysis
+
+
+
